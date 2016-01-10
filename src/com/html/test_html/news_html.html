@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>欢迎看新闻</title>
+    <style type="text/css">
+        /*标签的效果*/
+        #newsid{
+            border:dotted 1px blue;
+            width: 500px;
+            padding: 20px;
+        }
+        /*链接没选中与选中的效果*/
+        #newsid a:link, #newsid a:visited{
+            color: blue;
+            text-decoration: none;
+        }
+        /*链接悬停效果（鼠标放在此处的效果）*/
+        #newsid a:hover{
+            color: yellow;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function changfont(size){
+            var divNode = document.getElementById("newstext");
+            divNode.style.fontSize=size;
+        }
+    </script>
+</head>
+<body>
+<!-- 试题：新闻中显示，改变字体大小
+    1、HTML：通过标签定义页面基本结构
+    2、CSS：定义页面的样式
+    3、确定事件源和事件。
+        事件源：超链接
+        事件：点击事件
+        注意：超链接本身带有默认的事件，现在该超链接不需要默认的事件处理方式。怎么去消除默认处理方式？javascript:void(0)即可
+        没有默认效果，需要在该事件源注册指定的事件，并明确处理方式
+    4、定义处理方式的具体内容
+        在处理方式中，必须要明确处理的节点，或得节点对象，并调用其属性和行为，完成处理。
+ -->
+    <div id="newsid">
+        <h1>新闻标题</h1>
+        <a href="javascript:void(0)" onclick="changfont('24px')">大字体</a>
+        <a href="javascript:void(0)" onclick="changfont('18px')">原字体</a>
+        <a href="javascript:void(0)" onclick="changfont('12px')">小字体</a>
+        <hr>
+        <div id="newstext" style="font-size: 18px">
+            新闻内容：新华网北京12月20日电 12月20日11时40分许，广东深圳市光明新区凤凰社区恒泰裕工业园发生山体滑坡，附近西气东输管道发生爆炸。截至19时，已导致22栋民宅和厂房被埋，现场塌方面积10多万平方米，造成3人受伤，另有27人失联。
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>尚硅谷</title>
+    <script type="text/javascript">
+        /*需求：点击submit，提交写入的信息，检验是否选择了type，如果木有就弹出新窗口提示选择，
+        *   如果有就检验输入框中的内容是否有，木有弹出窗口提示输入内容
+        *   如果都通过了，就将添加的东西，添加到li标签中
+        */
+
+        window.onload = function() {
+            //节点互换函数
+            function replaceEle(aNode, bNode) {
+                //1、获取 anode 和 bnode 的父节点
+                var aParent = aNode.parentNode;
+                var bParent = bNode.parentNode;
+                //2、克隆 anode 节点
+                var aNode2 = aNode.cloneNode(true);
+                aNode2.onclick = aNode.onclick;
+                aNode2.index = aNode.index;
+                //3、互换节点
+                bParent.replaceChild(aNode2, bNode);
+                aParent.replaceChild(bNode, aNode);
+            }
+            //需求：实现city位置与lag位置的li节点位置的互换
+            //1、获取所有li节点
+            var liNodes = document.getElementsByTagName("li");
+            //2、为每个节点添加响应事件
+            for(var i=0; i<liNodes.length; i++) {
+                liNodes[i].index = i;
+                liNodes[i].onclick = function() {
+                //3、找到与之对应的li节点
+                    var clonindex = 0;
+                    if(this.index < 4) {
+                        clonindex = this.index + 4;
+                    }else {
+                        clonindex = this.index - 4;
+                    }
+                    //4、互换
+                    var tempindex = this.index;
+                    this.index = clonindex;
+                    clonindex = tempindex;
+                    replaceEle(this, liNodes[clonindex]);
+                }
+            }
+
+
+/*
+            var liNode = document.getElementsByTagName("li");
+            for(var i=0; i<liNode.length; i++) {
+                liNode[i].onclick = function() {
+                    alert("^_^"+this.firstChild.nodeValue);
+                }
+            }
+            //1、获取submit标签的节点
+            var submitNode = document.getElementById("submit");
+            //2、为submit添加响应事件
+            submitNode.onclick = function() {
+                //3、检验是否选择了type
+                var typeNode = document.getElementsByName("type");
+                var cheNode = null;
+                for(var i=0; i<typeNode.length; i++) {
+                    if(typeNode[i].checked) {
+                        cheNode = typeNode[i].value;
+                        break;
+                    }
+                }
+                if(cheNode == null) {
+                    alert("请选择类型！")
+                    return false;
+                }
+                //4、获取name的文本
+                var nameNode = document.getElementsByName("name")[0];
+                var nameVal = nameNode.value;
+                //5、去掉前后空格
+                var reg = /^\s*|\s*$/g;
+                nameVal = nameVal.replace(reg, "");
+                nameNode.value = nameVal;
+                if(nameVal == "") {
+                    alert("请输入内容！");
+                    return false;
+                }
+                //6、创建li节点
+                var liNode = document.createElement("li");
+                //7、创建nametext节点
+                var name = document.createTextNode(nameVal);
+                //8、将7节点添加为6的子节点
+                liNode.appendChild(name);
+                //9、将6的li节点添加到选择的类型节点
+                liNode.onclick = function() {
+                    alert("^_^" + this.firstChild.nodeValue);
+                }
+                document.getElementById(cheNode).appendChild(liNode);
+                //响应事件返回false以消除默认提交
+                return false;
+            }
+*/
+        }
+    </script>
+</head>
+<body>
+<p>你最喜欢的城市是那个？</p>
+    <ul id="city">
+        <li>北京</li>
+        <li>上海</li>
+        <li>广州</li>
+        <li>成都</li>
+    </ul>
+<p>你最喜欢的编程语言是那个？</p>
+    <ul id="lag">
+        <li>C语言</li>
+        <li>C++</li>
+        <li>Java</li>
+        <li>JS</li>
+    </ul>
+输入框：<input type="text" id="s">
+    <form>
+        <input type="radio" name="type" value="city"/>城市
+        <input type="radio" name="type" value="lag"/>语言<br/>
+        name:<input type="text" name="name"/>
+        <input type="submit" id="submit" name="提交" value="submit"/>
+    </form>
+</body>
+</html>
