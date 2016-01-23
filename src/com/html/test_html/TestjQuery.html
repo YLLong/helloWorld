@@ -2,15 +2,76 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>测试jQuery库滴</title>
+    <title>选择器的练习</title>
     <script type="text/javascript" src="Script/jquery.js"></script>
     <script type="text/javascript">
-        $(function(){
-            alert("11");
-        })
+        $(function() {
+            //1、点击所有的p节点能填出对应的节点内容
+            $("p").click(function() {
+                alert($(this).text());          //用了jQuery知识 text() 不加参数表示获取
+                $(this).text("^^"+$(this).text());             //text() 加参数表示将 this 设置为该参数值
+//                alert("^_^"+this.firstChild.nodeValue);
+            })
+
+            //2、使第一个 table 隔行变色
+            $("table:first tr:even").css("background","#ffcc11");
+            $("table:last tr:odd").css("background","#ffcc11");
+
+            //3、点击 butten 填出 checkbox 选中个数
+            $("button").click(function() {
+                alert($(":checkbox:checked").length);
+            });
+        });
     </script>
 </head>
 <body>
-
+    <p>段落1</p>
+    <p>段落2</p>
+    <p>段落3</p>
+    <br/>
+    <table>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+    </table>
+    <br/>
+    <hr/>
+    <br/>
+    <table>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+        <tr>
+            <td>第一行</td><td>第一行</td>
+        </tr>
+    </table>
+    <br/>
+    <input type="checkbox" name="name" />
+    <input type="checkbox" name="name" />
+    <input type="checkbox" name="name" />
+    <input type="checkbox" name="name" />
+    <input type="checkbox" name="name" />
+    <button>选择了多少个</button>
 </body>
 </html>
