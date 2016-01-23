@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> jQuery 克隆和替换节点</title>
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript">
+        //测试使用 jQuery replaceWith （replaceAll）方法：替换节点
+        /*
+         * 1、replaceWith,replaceAll 一对方法，可以完成一件事，就是
+         * 主语宾语那个在前面的问题
+         * 2、以上的两个方法还有移动节点的功能
+         * 3、节点互换需要先克隆节点
+         * 4、var $rl = $("#rl").replaceWith($bj2);
+         */
+        $(function () {
+            alert(1);
+            $("<li>南京</li>").replaceAll($("#city li:last"));
+            alert(2);
+            $("#city li:last").replaceWith($("<li>成都</li>"));
+            $("li").click(function () {
+                var temp = $(this).clone(true);
+                var rl = $("#city li:eq(2)").replaceWith(temp);     //返回前者节点
+                $(this).replaceWith(rl);
+            });
+
+            //测试 jQuery wrap /wrapAll /wrapInner
+
+            //单独包裹 li
+            $("#city li").wrap("<font color='red'></font>");
+            //整体包裹 li
+            $("#game li").wrapAll("<font color='red'></font>");
+            //被 li 包裹
+            $("#lang li").wrapInner("<font color='red'></font>");
+            alert(6);
+            $("#city").html("<li>天津</li>");
+        });
+    </script>
+</head>
+<body>
+
+<p>你喜欢那个城市？</p>
+<ul id="city">
+    <li id="BJ" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li>广州</li>
+    <li>成都</li>
+</ul>
+<br>
+<hr>
+<br>
+<p>你喜欢那个游戏？</p>
+<ul id="game">
+    <li id="jp" name="JPFC">极品飞车</li>
+    <li>鬼泣</li>
+    <li>求生之路</li>
+    <li>穿越火线</li>
+</ul>
+<br>
+<hr>
+<br>
+<p>你喜欢那个语言？</p>
+<ul id="lang">
+    <li id="c" name="cyuyan">C</li>
+    <li>C++</li>
+    <li>Java</li>
+    <li>PHP</li>
+</ul>
+<form>
+    gender:<input type="radio" name="gender" value="city" />City
+    <input type="radio" name="gender" value="game" />Game<br>
+    name:<input type="text" name="name" />
+    <input type="submit" id="submit" name="submit" value="添加"/>
+</form>
+
+</body>
+</html>
