@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> jQuery 测试分类添加内容</title>
+    <script type="text/javascript" src="Script/jquery.js"></script>
+    <script type="text/javascript">
+        /*
+         *需求：点击添加，提交写入的信息，检验是否选择了type，如果木有就弹出新窗口提示选择，
+         *   如果有就检验输入框中的内容是否有，木有弹出窗口提示输入内容
+         *   如果都通过了，就将添加的东西，添加到li标签中
+         *   使包括新增的 li 都能响应 onclick 事件：弹出 li 文本值
+         */
+        $(function() {
+            function showName(li) {
+                alert($(li).text());
+            }
+            $("li").click(function() {
+                showName(this);
+            });
+            //1、同 JS 的响应函数一样， jQuery 对象的响应函数若返回 false，
+            //  可以取消指定元素的默认行为，比如 submit ，a 等
+            //2、val() 方法，相当于 attr("value"),获取表单元素的 value 属性值，
+            //3、$。trim(str):可以去除 str 的前后空格
+            //4、jQuery 对象的方法的连缀：调用一个方法的返回值还是调用的对象，于是可以
+            //  在调用方法的后面依然调用先前的那个对象的其他方法。
+            $(":submit").click(function() {
+                var $type = $(":radio[name='gender']:checked");
+                if($type.length == 0) {
+                    alert("请选择类型！");
+                    return false;
+                }
+                var type = $type.val();
+
+                var $name = $(":text[name = 'name']");
+                var name = $name.val();
+                name = $.trim(name);            //去输入框的前后空格
+                $name.val(name);
+                if(name == "") {
+                    alert("请输入内容！");
+                    return false;
+                }
+                $("<li>"+name+"</li>").appendTo($("#"+type)).click(function() {
+                    showName(this);
+                });
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+
+<p>你喜欢那个城市？</p>
+<ul id="city">
+    <li id="BJ" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li>广州</li>
+    <li>成都</li>
+</ul>
+<br>
+<hr>
+<br>
+<p>你喜欢那个游戏？</p>
+<ul id="game">
+    <li id="jp" name="JPFC">极品飞车</li>
+    <li>鬼泣</li>
+    <li>求生之路</li>
+    <li>穿越火线</li>
+</ul>
+<br>
+<hr>
+<br>
+    <form>
+        gender:<input type="radio" name="gender" value="city" />City
+               <input type="radio" name="gender" value="game" />Game<br>
+        name:<input type="text" name="name" />
+        <input type="submit" id="submit" name="submit" value="添加"/>
+    </form>
+</body>
+</html>
