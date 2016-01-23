@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title> jQuery_DOM 节点操作</title>
+    <script type="text/javascript" src="Script/jquery.js"></script>
+    <script type="text/javascript">
+    //测试使用 jQuery 操作文本节点，属性节点
+    //及查找元素节点
+        $(function() {
+            //1、操作文本节点：通过 jQuery 对象的 text（） 方法
+            alert($("#BJ").text());
+            $("#BJ").text("^(*￣(oo)￣)^北京");         //text() 加参数是设置值
+            //2、操作属性节点：通过 jQuery 对象的 attr() 获取属性的 方法
+            //^(*￣(oo)￣)^：直接操作 value 属性值可以使用更便捷的 val() 方法
+            alert($(":text[name='username']").attr("value"));
+            $(":text[name='username']").attr("value", "尚硅谷");
+
+
+            //测试使用 jQuery 创建节点并插入节点到指定的节点中
+            /*
+            *   1、创建节点：使用 $(html) 方式即可，元素节点，文本节点，属性节点可以一网打尽
+            *   返回对应节点的 jQuery 对象：$("<li id='sc'>四川<l/li>");
+            *
+            *   2、添加节点：
+            *   1）.appendTo 和 append:主语和宾语的位置不同
+            *   $("<li id='SC'>四川</li>").appendTo($("#city"));
+            *   $("#city").append($("<li id='sc'>[四川]</li>"));
+            *
+            *   2）.prependTo 和 prepend:主语和宾语的位置不同
+            *   $("<li id='GD'>广东</li>").prependTo($("#city"));
+            *   $("#city").prepend($("<li id='sc'>[四川]</li>"));
+            */
+            //1、创建一个 li 节点，并把其加入到 #city 的子节点上
+            $("<li id='SC'>四川</li>").appendTo($("#city"));      //前者加到后者的子节点中的最后节点
+            $("#city").append($("<li id='sc'>[四川]</li>"));      //后者直接加到前者的最后子节点
+            $("<li id='GD'>广东</li>").prependTo($("#city"));      //前者加到后者的子节点中的第一节点
+            $("#city").prepend($("<li id='sc'>[四川]</li>"));      //后者直接加到前者的第一个子节点
+            //1、创建一个 li 节点，并把其加入到 #BJ 的节点前后
+            $("<li id='SC'>四川</li>").insertAfter($("#BJ"));      //前者加到后者节点的后面
+            $("#BJ").after($("<li id='sc'>[四川]</li>"));      //后者直接加到前者的后面
+            $("<li id='GD'>广东</li>").insertBefore($("#BJ"));      //前者加到后者节点的前面
+            $("#BJ").before($("<li id='sc'>[四川]</li>"));        //后者直接加到前者的前面
+        });
+    </script>
+</head>
+<p>你喜欢那个城市？</p>
+<ul id="city">
+    <li id="BJ" name="BeiJing">北京</li>
+    <li>上海</li>
+    <li>广州</li>
+    <li>成都</li>
+</ul>
+<br>
+<hr>
+<br>
+<p>你喜欢那个游戏？</p>
+<ul id="game">
+    <li id="jp" name="JPFC">极品飞车</li>
+    <li>鬼泣</li>
+    <li>求生之路</li>
+    <li>穿越火线</li>
+</ul>
+<br>
+<hr>
+<br>
+gender:<input type="radio" name="gender" value="city" />City
+<input type="radio" name="gender" value="game" />Game
+<br>
+<br>
+name:<input type="text" name="username" value="jQuery" />
+</body>
+</html>
