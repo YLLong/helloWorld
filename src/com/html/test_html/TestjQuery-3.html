@@ -14,6 +14,7 @@
          * 4、var $rl = $("#rl").replaceWith($bj2);
          */
         $(function () {
+            /*
             alert(1);
             $("<li>南京</li>").replaceAll($("#city li:last"));
             alert(2);
@@ -34,6 +35,20 @@
             $("#lang li").wrapInner("<font color='red'></font>");
             alert(6);
             $("#city").html("<li>天津</li>");
+            */
+
+            //测试移除事件: 使用 unbind 移除事件.
+            //one(): 只为某一个元素添加一次事件, 事件函数响应后, 将不再被触发响应.
+            $("#jp").one("click", function () {
+                alert("极品");
+            });
+            $("li:not(#jp)").click(function () {
+                alert(this.firstChild.nodeValue);
+                //对于 #bj 节点, 点击一次后, 就没有 click 响应函数了
+                if(this.id == "BJ") {
+                    $("#BJ").unbind("click");
+                }
+            });
         });
     </script>
 </head>
