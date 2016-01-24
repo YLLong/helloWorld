@@ -70,18 +70,23 @@
                 $(".content").hide();
             });*/
             //合成事件：hover：鼠标移上去就执行第一个function，移出执行第二个function
-            /*
+            // slideDown slideUp(高度效果) fadeIn fadeOut（透明度效果）
             $(".head").hover(function () {
-                $(".content").show();
+                $(".content").slideDown(1000);
             }, function () {
-                $(".content").hide();
+                $(".content").slideUp(1000);
             });
-            */
+
+            /*toggle() 可以切换元素的可见状态
+               slideToggle() 通过高度变化来切换匹配元素的可见性
+               fadeToggle() 通过透明度啦切换元素的可见性
+               fadeTo() 把不透明度渐变到指定值 两个参数
             $(".head").toggle(function () {
                 $(".content").show();
             }, function () {
                 $(".content").hide();
             });
+            */
         });
     </script>
 </head>
